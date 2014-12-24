@@ -37,6 +37,7 @@
 #define RECOVERY_ORS_PATH       "clockworkmod/ors"
 #define ORS_BOOT_SCRIPT_FILE    "/cache/recovery/openrecoveryscript"
 
+
 #ifdef PHILZ_TOUCH_RECOVERY
 // if these are changed, they won't take effect until we update libtouch_gui
 // custom background images
@@ -44,6 +45,11 @@
 
 // capture screen folder
 #define SCREEN_CAPTURE_FOLDER   "clockworkmod/screen_shots"
+
+// recovery lock file, pass key max chars and max allowed errors
+#define RECOVERY_LOCK_FILE      "/system/.recovery_key.lok"
+#define RECOVERY_LOCK_MAX_CHARS 6
+#define RECOVERY_LOCK_MAX_ERROR 3
 #endif
 
 
@@ -139,6 +145,7 @@ struct CWMSettingsIntValues wait_after_install;
 struct CWMSettingsLongIntValues t_zone;
 struct CWMSettingsLongIntValues t_zone_offset;
 struct CWMSettingsIntValues use_dst_time;
+struct CWMSettingsIntValues use_qcom_time_data_files;
 struct CWMSettingsIntValues use_qcom_time_daemon;
 struct CWMSettingsLongIntValues use_qcom_time_offset;
 
@@ -151,7 +158,6 @@ struct CompilerFlagsUI {
     int recovery_touchscreen_flip_x;
     int recovery_touchscreen_flip_y;
     int board_use_b_slot_protocol;
-    int board_use_fb2png;
     char brightness_sys_file[PATH_MAX];
     const char battery_level_path[PATH_MAX];
     const char board_post_unblank_command[PATH_MAX];
@@ -163,11 +169,21 @@ struct CompilerFlagsUI libtouch_flags;
 
 // load settings from config.ini file
 void refresh_touch_gui_settings(int on_start);
-#endif                                              // PHILZ_TOUCH_RECOVERY
+#endif    // PHILZ_TOUCH_RECOVERY
 void refresh_recovery_settings(int on_start);
 
 // check settings file on start and prompt to restore it if absent AND a backup is found: called by recovery.c
 void verify_settings_file();
+
+void toggle_signature_check();
+void toggle_install_zip_verify_md5();
+#ifdef ENABLE_LOKI
+void toggle_loki_support();
+int loki_support_enabled();
+#endif
+
+int read_config_file(const char* config_file, const char *key, char *value, const char *value_def);
+int write_config_file(const char* config_file, const char* key, const char* value);
 
 /*
 properties reference:

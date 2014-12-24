@@ -24,27 +24,29 @@
 
 char* MENU_HEADERS[] = { NULL };
 #ifndef USE_CHINESE_FONT
-char* MENU_ITEMS[] = { "Reboot System Now",
-                       "Install Zip",
-                       "Wipe Data/Factory Reset",
-                       "Wipe Cache Partition",
-                       "Backup and Restore",
-                       "Mounts and Storage",
-                       "Advanced",
-                       "PhilZ Settings",
-                       "Power Options",
-                       NULL };
+char* MENU_ITEMS[] = {
+    "Reboot System Now",
+    "Install Zip",
+    "Wipe and Format Options",
+    "Backup and Restore",
+    "Mounts and Storage",
+    "Advanced Functions",
+    "Recovery Settings",
+    "Power Options",
+    NULL
+};
 #else
-char* MENU_ITEMS[] = { "重启设备",
-                       "安装Zip刷机包",
-                       "清除数据/恢复出厂",
-                       "清除Cache分区",
-                       "备份和还原备份",
-                       "挂载和大容量储存",
-                       "高级选项",
-                       "PhilZ设置",
-                       "重启选项",
-                       NULL };
+char* MENU_ITEMS[] = {
+    "重启手机",
+    "安装Zip刷机包",
+    "清除数据/恢复出厂",
+    "备份和还原备份",
+    "挂载和大容量储存",
+    "高级选项",
+    "PhilZ设置",
+    "重启选项",
+    NULL
+};
 #endif
 void device_ui_init(UIParameters* ui_parameters) {
 }
