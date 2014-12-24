@@ -1611,7 +1611,7 @@ static void gestures_action_setup() {
 
     char* gesture_action[] = {   
         "禁止操作",  
-        "屏幕截屏",  
+        "屏幕截图",  
       // "aroma浏览器",
         "亮度调节",
       // "日志显示",

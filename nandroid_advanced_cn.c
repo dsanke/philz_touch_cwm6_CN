@@ -178,7 +178,7 @@ int check_backup_size(const char* backup_path) {
             backup_sdext,
     };
 
-    LOGI("Checking needed space for backup '%s'\n", backup_path);
+    LOGI("正在检测备份所需空间 '%s'\n", backup_path);
     // calculate needed space for backup
     // assume recovery and wimax always use a raw backup mode (Is_Image() = 0)
     char skipped_parts[1024] = "";
@@ -288,7 +288,7 @@ int check_backup_size(const char* backup_path) {
     // only check free space in Mb if we use tar or tar.gz as a default format
     // also, add extra 50 Mb for security measures
     if (free_percent < 3 || (default_backup_handler != dedupe_compress_wrapper && free_mb < backup_size_mb + 50)) {
-        LOGW("Low space for backup!\n");
+        LOGW("空间不足!\n");
         if (!ui_is_initialized()) {
             // do not prompt when it is an "adb shell nandroid backup" command
             LOGW("\n>>> Backup could fail with I/O error!! <<<\n\n");
@@ -354,8 +354,8 @@ void show_backup_stats(const char* backup_path) {
     else compression = 1 - ((long double)(final_size) / (long double)(Backup_Size));
 
     ui_print("\n备份完成!\n");
-    ui_print("备份所用时间: %02lld:%02lld mn\n", minutes, seconds);
-    ui_print("备份所用大小: %.2LfMb\n", (long double) final_size / 1048576);
+    ui_print("备份消耗时间: %02lld:%02lld min\n", minutes, seconds);
+    ui_print("备份占用大小: %.2LfMb\n", (long double) final_size / 1048576);
     // print compression % only if it is a tar / tar.gz backup
     // keep also for tar to show it is 0% compression
     if (default_backup_handler != dedupe_compress_wrapper)

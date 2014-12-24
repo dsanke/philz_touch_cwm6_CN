@@ -115,7 +115,7 @@ static void nandroid_callback(const char* filename) {
     static char size_progress[256] = "Size progress: N/A";
     if (show_nandroid_size_progress.value && Backup_Size != 0) {
         // Backup_Size == 0 if if we couldn't stat backup size
-        sprintf(size_progress, "Done %llu/%lluMb - Free %lluMb",
+        sprintf(size_progress, "备份需要 %llu/%lluMb - 剩余 %lluMb",
                 (Used_Size - Before_Used_Size) / 1048576LLU, Backup_Size / 1048576LLU, Free_Size / 1048576LLU);
     }
     size_progress[ui_get_text_cols() - 1] = '\0';
@@ -274,11 +274,11 @@ void nandroid_dedupe_gc(const char* blob_dir) {
     char *d = dirname(backup_dir);
     strcpy(backup_dir, d);
     strcat(backup_dir, "/backup");
-    ui_print("Freeing space...\n");
+    ui_print("正在清理...\n");
     char tmp[PATH_MAX];
     sprintf(tmp, "dedupe gc %s $(find %s -name '*.dup')", blob_dir, backup_dir);
     __system(tmp);
-    ui_print("Done freeing space.\n");
+    ui_print("清理完毕.\n");
 }
 
 static int dedupe_compress_wrapper(const char* backup_path, const char* backup_file_image, int callback) {
