@@ -115,7 +115,7 @@ static void nandroid_callback(const char* filename) {
     static char size_progress[256] = "Size progress: N/A";
     if (show_nandroid_size_progress.value && Backup_Size != 0) {
         // Backup_Size == 0 if if we couldn't stat backup size
-        sprintf(size_progress, "备份需要 %llu/%lluMb - 剩余 %lluMb",
+        sprintf(size_progress, "Done %llu/%lluMb - Free %lluMb",
                 (Used_Size - Before_Used_Size) / 1048576LLU, Backup_Size / 1048576LLU, Free_Size / 1048576LLU);
     }
     size_progress[ui_get_text_cols() - 1] = '\0';
